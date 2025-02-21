@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: welcome-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - welcome.local
+    secretName: welcome-cert-secret
+  rules:
+  - host: welcome.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: welcome-service
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
