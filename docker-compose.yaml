@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  welcome-app:
+    build: .
+    ports:
+      - "8000:5000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - welcome-network
+
+networks:
+  welcome-network:
+    driver: bridge
